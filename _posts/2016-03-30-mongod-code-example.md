@@ -15,9 +15,9 @@ One good thing about mongdb is its ability to build spatial index. Using various
  db.data.find({"geometry.coordinates": {$near:[ -177, -89], $maxDistance: 100}}).limit(3)
 db.runCommand({geoNear:"data",near: [ 40, 40], maxDistance:5000000})
 
-db.data.aggregate([{{$unwind: $geometry.coordinates}, $group: {_id: null, lonsum:{$avg: "$geometry.coordinates.0"}}}])
+db.data.aggregate([{$unwind: $geometry.coordinates}, $group: {_id: null, lonsum:{$avg: "$geometry.coordinates.0"}}])
 
-db.data.aggregate([{{$unwind: $geometry.coordinates}, {$group: {_id: null, lonsum:{$avg: "$geometry.coordinates.0"} } } } ])
+db.data.aggregate([{$unwind: $geometry.coordinates}, {$group: {_id: null, lonsum:{$avg: "$geometry.coordinates.0"} } }  ])
 
 
 db.data.aggregate([{$unwind: "$geometry.coordinates"}, 
